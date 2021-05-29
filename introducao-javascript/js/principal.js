@@ -31,9 +31,10 @@ function calculaImc(pacienteId) {
         if (imcVal) {
             var imc = peso / (altura * altura);
         } else {
-            imc = "Dados inválidos"
+            paciente.classList.add("paciente-invalido");
+            imc = "Dados inválidos";
         }
 
-        tdImc.textContent = imc;
+        tdImc.textContent = imc.toFixed(2);
     }
 }
