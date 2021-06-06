@@ -119,10 +119,10 @@ button{
 
 }
 
-button:active{
+/* button:active{
 	
 	
-}
+} */
 
 button[disabled=disabled], button:disabled {
     background-color: gray;
@@ -137,7 +137,7 @@ button:hover{
 }
 
 .mensagem-erro{
-	background-color: lightcoral;
+	color: lightcoral;
 	font-weight: bold;
 	font-size: 1.2em;
 }

@@ -8,17 +8,15 @@ function adicionaPaciente(event) {
     var form = document.querySelector("#form-adiciona");
     var tabela = document.querySelector("#tabela-pacientes");
     var paciente = recuperaDadosDoForm(form);
-    var mensagem = document.querySelector("#mensagem-erro");
-    
+    var ul = document.querySelector("#mensagem-erro");
+    ul.innerHTML = ""
     var pacienteTr = CriaTr();
     var pacienteTd = CriaTd(paciente);
-    
-    PreencheTr(pacienteTr, pacienteTd, mensagem);
-    
+
+    PreencheTr(pacienteTr, pacienteTd, form);
+
     preencheTBody(pacienteTr, tabela);
-    
-    // form.reset()
-    
+
 }
 
 function CriaTr() {
@@ -27,7 +25,7 @@ function CriaTr() {
     return tr;
 }
 
-function CriaTd(dado){
+function CriaTd(dado) {
 
     var tdMontado = {
         nomeTd: montaTd(dado.nome, "info-nome"),
@@ -39,7 +37,7 @@ function CriaTd(dado){
     return tdMontado
 }
 
-function montaTd(dado, classe){
+function montaTd(dado, classe) {
 
     var td = document.createElement("td")
     td.textContent = dado;
@@ -47,26 +45,67 @@ function montaTd(dado, classe){
     return td
 }
 
-function PreencheTr(dadoTr, dadoTd, mensagem) {
+function PreencheTr(dadoTr, dadoTd, form) {
 
-    let peso = dadoTd.pesoTd.textContent;
-    let altura = dadoTd.alturaTd.textContent;
-    
-    if (!validaPeso(peso, dadoTd.pesoTd)) {
-        mensagem.textContent = "Peso inválido";
-    }
-    else if (!validaAltura(altura, dadoTd.alturaTd)) {
-        mensagem.textContent = "Altura inválida";
-    }else{
-        for(let i in dadoTd){
+    let erros = validaPaciente(dadoTd);
+
+    if (erros.length == 0) {
+        for (let i in dadoTd) {
             dadoTr.appendChild(dadoTd[i]);
         }
+        form.reset();
+    }else{
+        exibeErros(erros)
     }
 }
 
+function validaPaciente(dadoTd) {
+    let peso = dadoTd.pesoTd.textContent;
+    let altura = dadoTd.alturaTd.textContent;
+    let nome = dadoTd.nomeTd.textContent;
+    let gordura = dadoTd.gorduraTd.textContent;
+    let erros = [];
+    pacienteValido = true;
+
+    if (!validaPeso(peso, dadoTd.pesoTd)) {
+        erros.push("Peso inválido");
+        pacienteValido = false;
+    }
+    if (!validaAltura(altura, dadoTd.alturaTd)) {
+        erros.push("Altura inválida");
+        pacienteValido = false;
+    }
+    if (!validaCampo(nome)) {
+        erros.push("Preencha o campo Nome");
+    }
+    if (!validaCampo(gordura)) {
+        erros.push("Preencha o campo Gordura");
+    }
+    return erros;
+}
+
+
+function validaCampo(campo){
+    if (campo == "") {
+        return false
+    }
+    return true
+}
+
+
+function exibeErros(erros) {
+    var ul = document.querySelector("#mensagem-erro");
+    ul.innerHTML = "";
+    erros.forEach(erro => {
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+
+}
 
 function preencheTBody(dadoTr, tabela) {
-    
+
     tabela.appendChild(dadoTr);
 }
 
@@ -79,7 +118,6 @@ function recuperaDadosDoForm(form) {
         gordura: form.gordura.value,
         imc: calculaImc(form.peso.value, form.altura.value)
     }
-    
+
     return paciente;
 }
-
