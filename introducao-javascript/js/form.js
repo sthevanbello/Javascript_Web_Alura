@@ -8,15 +8,16 @@ function adicionaPaciente(event) {
     var form = document.querySelector("#form-adiciona");
     var tabela = document.querySelector("#tabela-pacientes");
     var paciente = recuperaDadosDoForm(form);
+    var mensagem = document.querySelector("#mensagem-erro");
     
     var pacienteTr = CriaTr();
     var pacienteTd = CriaTd(paciente);
     
-    PreencheTr(pacienteTr, pacienteTd);
+    PreencheTr(pacienteTr, pacienteTd, mensagem);
     
     preencheTBody(pacienteTr, tabela);
     
-    form.reset()
+    // form.reset()
     
 }
 
@@ -46,14 +47,26 @@ function montaTd(dado, classe){
     return td
 }
 
-function PreencheTr(dadoTr, dadoTd) {
+function PreencheTr(dadoTr, dadoTd, mensagem) {
 
-    for(let i in dadoTd){
-        dadoTr.appendChild(dadoTd[i]);
+    let peso = dadoTd.pesoTd.textContent;
+    let altura = dadoTd.alturaTd.textContent;
+    
+    if (!validaPeso(peso, dadoTd.pesoTd)) {
+        mensagem.textContent = "Peso inválido";
+    }
+    else if (!validaAltura(altura, dadoTd.alturaTd)) {
+        mensagem.textContent = "Altura inválida";
+    }else{
+        for(let i in dadoTd){
+            dadoTr.appendChild(dadoTd[i]);
+        }
     }
 }
 
+
 function preencheTBody(dadoTr, tabela) {
+    
     tabela.appendChild(dadoTr);
 }
 
