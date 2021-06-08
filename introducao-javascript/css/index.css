@@ -79,13 +79,20 @@ label{
 	margin-bottom: .2em;
 }
 
+.filtrar-tabela{
+	margin-bottom: 10px;
+	width: 200px;
+    height: 35px;
+    
+}
+
 .campo{
 	margin: 0;
 	padding-bottom: 1em;
 	width: 100%;
 	border: 1px solid #ccc;
 	padding: .7em;
-	width: 100%;
+	
 }
 
 .campo-medio{
@@ -116,13 +123,13 @@ button{
     clear: both;
     margin: 10px 20px;
 	
-
 }
 
-/* button:active{
-	
-	
-} */
+#btn-busca{
+	display:inline;
+	width: auto;
+    height: auto;
+}
 
 button[disabled=disabled], button:disabled {
     background-color: gray;
@@ -158,3 +165,12 @@ button:hover{
 	font-style: italic;
 }
 
+.fadeOut{
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.invisivel{
+	transition: 0.5s;
+	display: none;
+}
