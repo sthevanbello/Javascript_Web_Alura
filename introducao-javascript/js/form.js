@@ -6,17 +6,24 @@ function adicionaPaciente(event) {
 
     event.preventDefault();
     var form = document.querySelector("#form-adiciona");
-    var tabela = document.querySelector("#tabela-pacientes");
     var paciente = recuperaDadosDoForm(form);
+    
+    AdicionaNaTabela(paciente);
+
+}
+
+function AdicionaNaTabela(paciente) {
     var ul = document.querySelector("#mensagem-erro");
-    ul.innerHTML = ""
+    ul.innerHTML = "";
+    
+    var form = document.querySelector("#form-adiciona");
+    var tabela = document.querySelector("#tabela-pacientes");
     var pacienteTr = CriaTr();
     var pacienteTd = CriaTd(paciente);
 
     PreencheTr(pacienteTr, pacienteTd, form);
-
     preencheTBody(pacienteTr, tabela);
-
+    
 }
 
 function CriaTr() {
@@ -105,7 +112,7 @@ function exibeErros(erros) {
 }
 
 function preencheTBody(dadoTr, tabela) {
-
+    
     tabela.appendChild(dadoTr);
 }
 

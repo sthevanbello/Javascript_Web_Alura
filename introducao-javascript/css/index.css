@@ -116,9 +116,9 @@ button{
 	margin-top: -3px;
 	color: #fff;
 	background-color:#0c8cd3;
-	border-radius: 20px;
+	border-radius: 10px;
 	border-color: #04324c;
-	width: 20%;
+	width: auto;
     display: block;
     clear: both;
     margin: 10px 20px;
@@ -167,6 +167,11 @@ button:hover{
 
 .fadeOut{
 	opacity: 0;
+	transition: 0.5s;
+}
+
+.fadeIn{
+	opacity: 100;
 	transition: 0.5s;
 }
 

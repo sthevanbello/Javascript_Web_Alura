@@ -1,5 +1,4 @@
 var campoFiltro = document.querySelector("#filtro-tabela");
-var botaoBusca = document.querySelector("#btn-busca");
 
 campoFiltro.addEventListener("input", function(){
     console.log(this.value);
@@ -11,6 +10,7 @@ campoFiltro.addEventListener("input", function(){
             let nomeTd = paciente.querySelector(".info-nome");
             var nome = nomeTd.textContent;
             var expressao = new RegExp(this.value, "i");
+
             if ( !(expressao.test(nome))) {
                 
                 paciente.classList.add("invisivel");
